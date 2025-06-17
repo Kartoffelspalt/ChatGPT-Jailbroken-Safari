@@ -1,13 +1,9 @@
 // ==UserScript==
-// @name         ChatGPT Jailbreak Enhanced (by Batlez)
-// @namespace    https://github.com/Batlez
-// @version      1.3.0
-// @description  Ask ChatGPT any question possible
-// @author       Batlez
-// @match        *://chatgpt.com/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=chatgpt.com
-// @grant        GM_addStyle
-// @license      MIT
+// @name        ChatGPT Jailbreak Enhanced Userscript Version by Kartoffelspalt
+// @description Ask ChatGPT any possible Question
+// @match       *://chatgpt.com/*
+// @author      Kartoffelspalt
+// @version     1.0 (Based on 1.3)
 // ==/UserScript==
 
 (function () {
@@ -170,7 +166,7 @@
         .batlez-jailbreak-button {
             position: fixed; bottom: 30px; right: 30px; z-index: 9999;
             padding: 12px 20px; background-color: var(--batlez-button-bg); color: var(--batlez-button-text);
-            font-size: 14px; font-family: "Segoe UI", Arial, sans-serif; font-weight: 600;
+            font-size: 14px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; font-weight: 600;
             border: none; border-radius: 8px; cursor: pointer;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
             transition: background-color 0.3s ease;
@@ -186,7 +182,7 @@
         .batlez-container {
             width: 90%; max-width: 600px; border-radius: 12px; padding: 24px;
             box-shadow: 0 0 20px rgba(0,0,0,0.4); display: flex; flex-direction: column;
-            gap: 18px; font-family: "Segoe UI", Arial, sans-serif;
+            gap: 18px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             background-color: var(--batlez-bg); color: var(--batlez-text);
             max-height: 90vh; overflow-y: auto;
         }
@@ -232,7 +228,12 @@
         }
         dynamicCSS += `}\n`;
     });
-    GM_addStyle(dynamicCSS);
+
+    // Manual CSS injection for Safari
+    const styleElement = document.createElement('style');
+    styleElement.textContent = dynamicCSS;
+    document.head.appendChild(styleElement);
+
 
     function insertText(text) {
         const editableDiv = document.querySelector('textarea[id^="prompt-textarea"]');
@@ -376,6 +377,7 @@
         applyTheme(getCurrentThemeName());
     }
 
+    // Use a more robust check for document readiness for Safari
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initJailbreakButton);
     } else {
