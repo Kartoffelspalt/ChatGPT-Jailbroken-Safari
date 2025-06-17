@@ -1,4 +1,5 @@
-# Userscripts Safari Version of ChatGPT Jailbroken
+<h1 align="center">Userscripts Safari Version of ChatGPT Jailbroken</h1>
+#
 <h1 align="center">ChatGPT Jailbroken! Includes FREE GPT-4</h1>
 
 <p align="center">
